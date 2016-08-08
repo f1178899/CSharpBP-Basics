@@ -17,7 +17,7 @@ namespace Acme.Biz.Tests
             // Arrange
             var vendor = new Vendor();
             vendor.CompanyName = "ABC Corp";
-            var expected = "Message sent: Hello ABC Corp";
+            var expected = "Message sent: HelloABC Corp";
 
             // Act
             var actual = vendor.SendWelcomeEmail("Test Message");
