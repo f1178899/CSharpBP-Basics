@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Acme.Biz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Acme.Biz;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Acme.Biz.Tests
+namespace Acme.BizTests
 {
     [TestClass()]
     public class ProductTests
@@ -55,8 +50,6 @@ namespace Acme.Biz.Tests
             var expected = "12-text-Product";
             //act
             var actural = currentProduct.ProductCode;
-
-
             Assert.AreEqual(expected, actural);
         }
     }

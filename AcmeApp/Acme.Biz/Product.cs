@@ -1,9 +1,5 @@
 ﻿using Acme.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Acme.Biz
 {
@@ -25,60 +21,37 @@ namespace Acme.Biz
         /// <param name="description"></param>
         public Product(int productId, string productName, string description) : this()
         {
-            this.productName = productName;
-
-            this.ProductId = productId;
-
-            this.description = description;
+            ProductName = productName;
+            ProductId = productId;
+            Description = description;
 
         }
-        private string productName;
-        public string ProductName
-        {
-            get { return productName; }
-            set { productName = value; }
-        }
-        public string ProductCode => ProductId + "-" + ProductName.Trim().Replace(" ","-");
+
+        public string ProductName { get; set; }
+
+        public string ProductCode => ProductId + "-" + ProductName.Trim().Replace(" ", "-");
         //Auto-Implemented Properties.
         public int ProductId { get; set; }
-        private string description;
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
+        public string Description { get; set; }
 
-        private Vendor vendor;
+        private Vendor _vendor;
 
         public Vendor Vendor
         {
-            get
-            {
-                if (this.vendor == null)
-                {
-                    this.vendor = new Vendor();
-                }
-                return vendor;
-            }
-            set { vendor = value; }
+            get { return _vendor ?? (_vendor = new Vendor()); }
+            set { _vendor = value; }
         }
 
-        private DateTime? availabilityDate;
-
-        public DateTime? AvailabilityDate
-        {
-            get { return availabilityDate; }
-            set { availabilityDate = value; }
-        }
+        public DateTime? AvailabilityDate { get; set; }
 
         public string SayHello()
         {
-            var vendor = this.Vendor;
+            var vendor = Vendor;
             vendor.SendWelcomeEmail("Message from sayHello");
             var emailService = new EmailService();
-            var confirmation = emailService.SendMessage("test", this.ProductName, "f1178899@gmail.com");
-            var result = LoggingService.LogAction("saying Hello");
-            return "Hello " + productName + ProductId + " Available on: " + this.AvailabilityDate?.ToShortDateString();
+            emailService.SendMessage("test", ProductName, "f1178899@gmail.com");
+            LoggingService.LogAction("saying Hello");
+            return "Hello " + ProductName + ProductId + " Available on: " + AvailabilityDate?.ToShortDateString();
         }
 
 
